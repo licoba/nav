@@ -4,8 +4,7 @@
   </a>
   <br />
   <b>发现导航</b>
-  <p align="center">一个纯静态、支持SEO、在线编辑的强大导航网站，希望您会喜欢</p>
-  <p align="center">内置收录多达 800+ 优质网站， 助您工作、学习和生活</p>
+  <p align="center">一个纯静态、支持SEO、在线编辑的强大导航网站</p>
   <p align="center">
     <img src="https://img.shields.io/github/v/release/xjh22222228/nav" />
     <a href="https://github.com/xjh22222228/nav/stargazers"><img src="https://img.shields.io/github/stars/xjh22222228/nav" alt="Stars"/></a>
@@ -14,24 +13,6 @@
   </p>
 </p>
 
-<picture>
-  <source
-    media="(prefers-color-scheme: dark)"
-    srcset="
-      https://api.star-history.com/svg?repos=xjh22222228/nav&type=Date&theme=dark
-    "
-  />
-  <source
-    media="(prefers-color-scheme: light)"
-    srcset="
-      https://api.star-history.com/svg?repos=xjh22222228/nav&type=Date
-    "
-  />
-  <img
-    alt="Star History Chart"
-    src="https://api.star-history.com/svg?repos=xjh22222228/nav&type=Date"
-  />
-</picture>
 
 ## 特性
 
@@ -69,15 +50,11 @@
 
 </details>
 
-## 预览
-
-- [https://nav3.cn/](https://nav3.cn/)
-
 ## 部署
 
 零成本部署，像数 `321` 一样简单。
 
-#### gh-pages (免费)
+#### Github Pages (免费)
 
 1、右上角点击 `Fork` 当前项目。
 
@@ -102,24 +79,11 @@
 
 [https://github.com/apps/vercel](https://github.com/apps/vercel)
 
-#### 自有部署
-
-自有部署一直不是发现导航的需求目标，但陆续有人问，决定从`v8.8.0`版本开始支持！
-
-#### Fork vs 自有部署
-
-|          | 自有部署         | Fork             |
-| -------- | ---------------- | ---------------- |
-| 速度     | 保存即时生效     | 需要等待构建完成 |
-| 成本     | 需要自己有服务器 | 各种平台免费部署 |
-| 数据存储 | 需要定时备份     | 永久存储         |
-| 存活状态 | 未知             | 只要`GitHub`还在 |
-| 图片     | 走服务器带宽     | 免费 CDN 加速    |
+#### 私有部署
 
 
-## 配置说明
 
-只需要修改根目录 `package.json` 以下相关字段
+只需要修改根目录 `package.json` 以下相关字段，即可实现私有部署
 |Fork |自有部署 | 字段 | 说明 |
 | --------------------------------------------- | -------- |--- |--- |
 |√ | | gitRepoUrl | 填写您的仓库地址 |
@@ -128,7 +92,6 @@
 |√ | √| hashMode | 路由是否 Hash 模式, 如果是部署在 `github pages` 务必设为 true |
 | | √| password | 自有部署登录密码，`Fork` 用户无需填写 |
 | | √| address | 自有部署, 一旦填写认为你是自有部署，`https://你的域名或IP:7777` |
-|√| √| email | 用户提交收录通知 |
 
 ## 后台
 
@@ -136,15 +99,8 @@
 - 前台地址: https://licoba.github.io/nav/#/light 
 - 后台地址: https://licoba.github.io/nav/#/system
 
-## 升级
+## 手动升级
 
-#### 自动
-
-仅限于 `Fork` 用户
-
-[点这里安装 Pull](https://github.com/apps/pull) ， 只要有升级会自动给你的仓库提交 `Pull Requests` 点击合并即可。
-
-#### 手动
 
 将你的仓库克隆下来执行以下命令
 
@@ -154,18 +110,14 @@ git remote add upstream https://gitee.com/xiejiahe/nav.git
 git fetch upstream main
 git merge upstream/main --allow-unrelated-histories --no-edit
 git push
-
 # 如果安装了node只需执行
 npm run update
 ```
 
-## 更新日志
-
-[CHANGELOG](https://github.com/xjh22222228/nav/releases)
 
 ## 开发构建
 
-- NODE:版本 >= v20
+> NODE版本 >= v20
 
 ```bash
 # 下载
@@ -178,8 +130,3 @@ yarn start
 # 打包
 yarn build
 ```
-
-
-## License
-
-[MIT](./LICENSE)
