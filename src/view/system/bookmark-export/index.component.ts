@@ -98,13 +98,16 @@ export default class SystemBookmarkExportComponent {
     return new Promise((resolve, reject) => {
       try {
         const jsonData = JSON.parse(data)
+
         function createBookmarkHTML(item) {
           let html = ''
           const title = item.title || item.name || '未知'
+          const icon = item.icon ? ` ICON="${item.icon}"` : ''
+
           if (item.url) {
             html += `<DT><A HREF="${item.url}" ADD_DATE="${
               new Date(item.createdAt).getTime() / 1000
-            }">${title}</A>\n`
+            }"${icon}>${title}</A>\n`
           } else {
             html += `<DT><H3 ADD_DATE="${
               new Date(item.createdAt).getTime() / 1000
@@ -155,41 +158,7 @@ export default class SystemBookmarkExportComponent {
 
     const webs: INavProps = JSON.parse(JSON.stringify(this.websiteList))
     const promiseItems = []
-    function getIconItems(data) {
-      if (!Array.isArray(data)) {
-        return
-      }
-      data.forEach((item) => {
-        // 移除无用属性，减少传输大小
-        delete item.id
-        delete item.createdAt
-        delete item.rate
-        delete item.top
-        delete item.index
-        delete item.ownVisible
-        delete item.breadcrumb
-        delete item.ok
-        delete item.__name__
-        delete item.__desc__
-        delete item.collapsed
-        if (Array.isArray(item.nav)) {
-          getIconItems(item.nav)
-        }
-        if (item.url) {
-          delete item.urls
-          promiseItems.push(
-            that.imageToBase64(item).finally(() => {
-              that.currentNumber += 1
-            })
-          )
-        }
-      })
-    }
-    if (this.isExportIcon) {
-      getIconItems(webs)
-      this.countAll = promiseItems.length
-      await Promise.allSettled(promiseItems)
-    }
+
     console.log('所有书签：' + JSON.stringify(webs))
     this.myBookmarksExport({ data: JSON.stringify(webs) })
       .then((res) => {

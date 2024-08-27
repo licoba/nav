@@ -218,6 +218,7 @@ const zhCN: Record<string, string> = {
   _imageCDN: '图片CDN',
   _docTitle: '文档标题',
   _backToTop: '返回顶部',
+  _bookExportTip: `<p>导出的书签为一个html文件，会自动保存到下载文件夹</p><p>使用浏览器导入这个html文件，即可导入所有书签！</p>浏览器地址栏输入 <a href="chrome://bookmarks/" target="_blank">chrome://bookmarks</a>`,
 }
 
 export default zhCN

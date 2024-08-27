@@ -1,11 +1,6 @@
 <nz-spin nzSimple nzSize="large" class="center" *ngIf="submitting"> </nz-spin>
 <div class="center">
-  <nz-switch [(ngModel)]="isExportIcon"></nz-switch>
-  <span class="ml10">同时导出网站图标，耗时较久</span>
-  <p class="mt10" *ngIf="seconds > 0">耗时 {{ seconds }} 秒</p>
-  <p class="mt10" *ngIf="countAll > 0">
-    正在处理 {{ currentNumber }} / {{ countAll }}
-  </p>
+  <div [innerHTML]="$t('_bookExportTip')" class="mt10"></div>
 </div>
 <div class="book-wrapper mt10">
   <div>
