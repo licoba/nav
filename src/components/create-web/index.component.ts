@@ -150,9 +150,9 @@ export class CreateWebComponent {
         this.validateForm.get('icon')!.setValue(res['url'])
       } else {
         // 自动获取图标的功能
-        var cdnUrl =
-          'http://www.google.com/s2/favicons?domain=' + url + '&sz=128'
-        this.validateForm.get('icon')!.setValue(cdnUrl)
+        // var cdnUrl =
+        //   'http://www.google.com/s2/favicons?domain=' + url + '&sz=128'
+        // this.validateForm.get('icon')!.setValue(cdnUrl)
       }
       if (res['title'] != null && !titleVal) {
         this.validateForm.get('title')!.setValue(res['title'])
