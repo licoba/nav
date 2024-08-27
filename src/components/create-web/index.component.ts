@@ -146,8 +146,13 @@ export class CreateWebComponent {
 
       this.getting = true
       const res = await getWebInfo(url)
-      if (res['url'] != null && !iconVal) {
+      if (res['url'] != null && !iconVal && res['url'] != '') {
         this.validateForm.get('icon')!.setValue(res['url'])
+      } else {
+        // 自动获取图标的功能
+        var cdnUrl =
+          'http://www.google.com/s2/favicons?domain=' + url + '&sz=128'
+        this.validateForm.get('icon')!.setValue(cdnUrl)
       }
       if (res['title'] != null && !titleVal) {
         this.validateForm.get('title')!.setValue(res['title'])
