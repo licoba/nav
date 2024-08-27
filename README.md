@@ -59,6 +59,7 @@
 1、右上角点击 `Fork` 当前项目。
 
 2、[https://github.com/settings/tokens/new](https://github.com/settings/tokens/new) 申请 `token`, 勾选相应的权限, 如果不懂就全部选中，复制并保存 Token；
+
 3、https://github.com/licoba/nav/settings/secrets/actions/new 添加申请的 token， name 填写 `TOKEN` 大写。
 
 4、打开 https://github.com/licoba/nav/actions 开启 action 自动部署
