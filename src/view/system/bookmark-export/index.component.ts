@@ -94,10 +94,6 @@ export default class SystemBookmarkExportComponent {
   }
 
   async bookmarksExport() {
-    if (!getAuthCode()) {
-      return this.notification.error('Error', '请授权')
-    }
-
     if (this.submitting) {
       return
     }
