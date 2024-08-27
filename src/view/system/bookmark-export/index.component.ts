@@ -93,6 +93,53 @@ export default class SystemBookmarkExportComponent {
     }
   }
 
+  // 自己定义的导出函数
+  async myBookmarksExport({ data }) {
+    return new Promise((resolve, reject) => {
+      try {
+        const jsonData = JSON.parse(data)
+        function createBookmarkHTML(item) {
+          let html = ''
+          const title = item.title || item.name || '未知'
+          if (item.url) {
+            html += `<DT><A HREF="${item.url}" ADD_DATE="${
+              new Date(item.createdAt).getTime() / 1000
+            }">${title}</A>\n`
+          } else {
+            html += `<DT><H3 ADD_DATE="${
+              new Date(item.createdAt).getTime() / 1000
+            }">${title}</H3>\n`
+            if (item.nav && item.nav.length > 0) {
+              html += `<DL><p>\n`
+              item.nav.forEach((subItem) => {
+                html += createBookmarkHTML(subItem)
+              })
+              html += `</DL><p>\n`
+            }
+          }
+          return html
+        }
+
+        let bookmarksHTML = '<!DOCTYPE NETSCAPE-Bookmark-file-1>\n'
+        bookmarksHTML +=
+          '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\n'
+        bookmarksHTML += '<TITLE>Bookmarks</TITLE>\n'
+        bookmarksHTML += '<H1>Bookmarks</H1>\n'
+        bookmarksHTML += '<DL><p>\n'
+
+        jsonData.forEach((item) => {
+          bookmarksHTML += createBookmarkHTML(item)
+        })
+
+        bookmarksHTML += '</DL><p>\n'
+
+        resolve({ data: { data: bookmarksHTML } })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
   async bookmarksExport() {
     if (this.submitting) {
       return
@@ -143,8 +190,8 @@ export default class SystemBookmarkExportComponent {
       this.countAll = promiseItems.length
       await Promise.allSettled(promiseItems)
     }
-
-    bookmarksExport({ data: LZString.compress(JSON.stringify(webs)) })
+    console.log('所有书签：' + JSON.stringify(webs))
+    this.myBookmarksExport({ data: JSON.stringify(webs) })
       .then((res) => {
         const fileName = '发现导航书签.html'
         const blob = new Blob([res.data.data], {
@@ -155,9 +202,29 @@ export default class SystemBookmarkExportComponent {
           nzDuration: 0,
         })
       })
+      .catch((error) => {
+        this.notification.error('导出失败', error)
+        console.error('导出失败', error)
+      })
       .finally(() => {
         this.submitting = false
         clearInterval(interval)
       })
+
+    // bookmarksExport({ data: LZString.compress(JSON.stringify(webs)) })
+    //   .then((res) => {
+    //     const fileName = '发现导航书签.html'
+    //     const blob = new Blob([res.data.data], {
+    //       type: 'text/html;charset=utf-8',
+    //     })
+    //     saveAs(blob, fileName)
+    //     this.notification.success('导出成功', fileName, {
+    //       nzDuration: 0,
+    //     })
+    //   })
+    //   .finally(() => {
+    //     this.submitting = false
+    //     clearInterval(interval)
+    //   })
   }
 }

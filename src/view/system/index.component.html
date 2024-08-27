@@ -34,13 +34,6 @@
             </li>
             <li
               nz-menu-item
-              [nzSelected]="currentMenu === 'search'"
-              (click)="goRoute('/system/search')"
-            >
-              {{ $t('_searchEngines') }}
-            </li>
-            <li
-              nz-menu-item
               [nzSelected]="currentMenu === 'bookmarkExport'"
               (click)="goRoute('/system/bookmarkExport', isAuthz)"
             >
@@ -48,11 +41,12 @@
             </li>
             <li
               nz-menu-item
-              [nzSelected]="currentMenu === 'vip'"
-              (click)="goRoute('/system/vip')"
+              [nzSelected]="currentMenu === 'search'"
+              (click)="goRoute('/system/search')"
             >
-              {{ $t('_vipAuth') }}
+              {{ $t('_searchEngines') }}
             </li>
+
             <li
               nz-menu-item
               [nzSelected]="currentMenu === 'info'"
