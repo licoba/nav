@@ -11,8 +11,8 @@
   "================": "网站所有内容都是可以在后台系统配置的，不懂的不要擅自修改源代码，出现异常请自行处理",
   "name": "nav",
   "version": "8.8.1",
-  "author": "xiejiahe",
-  "homepage": "https://github.com/xjh22222228/nav",
+  "author": "licoba",
+  "homepage": "https://github.com/licoba/nav",
   "scripts": {
     "ng": "ng",
     "start": "npm run build-start && ng serve --port=7001",
