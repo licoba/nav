@@ -16,6 +16,8 @@ import { ISettings } from 'src/types'
 import { isSelfDevelop } from 'src/utils/util'
 
 const { gitRepoUrl } = config
+const { gitBackupRepoName } = config
+
 const s = gitRepoUrl.split('/')
 const DEFAULT_BRANCH = config.branch
 
@@ -184,6 +186,36 @@ export async function createFile({
   const method = isGitee() ? http.post : http.put
   return method(`/repos/${authorName}/${repoName}/contents/${path}`, {
     message: `rebot(CI): ${message}`,
+    branch,
+    content: isEncode ? encode(content) : content,
+  }).then((res) => {
+    requestActionUrl()
+    return res
+  })
+}
+
+export async function createBackFile({
+  message,
+  content,
+  path,
+  branch = DEFAULT_BRANCH,
+  isEncode = true,
+}: Iupdate) {
+  if (isSelfDevelop) {
+    return http
+      .post('/api/contents/create', {
+        path,
+        content,
+      })
+      .then((res) => {
+        requestActionUrl()
+        return res
+      })
+  }
+
+  const method = isGitee() ? http.post : http.put
+  return method(`/repos/${authorName}/${gitBackupRepoName}/contents/${path}`, {
+    message: `Nav备份: ${message}`,
     branch,
     content: isEncode ? encode(content) : content,
   }).then((res) => {

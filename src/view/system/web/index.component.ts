@@ -27,6 +27,7 @@ import { $t } from 'src/locale'
 import { saveAs } from 'file-saver'
 import event from 'src/utils/mitt'
 import config from '../../../../nav.config.json'
+import { createFile, createBackFile, getCDN } from 'src/api'
 
 @Component({
   selector: 'app-admin',
@@ -248,6 +249,20 @@ export default class WebpComponent {
     const value = JSON.stringify(params)
     const blob = new Blob([value], { type: 'text/plain;charset=utf-8' })
     saveAs(blob, 'backups_nav.json')
+
+    const fileParams = {
+      message: `添加nav备份文件${Date.now()}`,
+      content: value,
+      path: `nav/Nav备份_${Date.now()}.json`,
+    }
+
+    createBackFile(fileParams)
+      .then((res) => {
+        this.message.success('备份到GitHub成功！')
+      })
+      .catch((error) => {
+        this.message.success('备份到GitHub失败！')
+      })
   }
 
   handleUploadBackup(e: any) {

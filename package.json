@@ -1,5 +1,6 @@
 {
   "gitRepoUrl": "https://github.com/licoba/nav",
+  "gitBackupRepoName": "backup",
   "provider": "Github",
   "branch": "main",
   "hashMode": true,
@@ -53,8 +54,9 @@
     "qs": "^6.13.0",
     "rough-notation": "^0.5.1",
     "rxjs": "~7.8.1",
+    "simple-git": "^3.25.0",
     "tslib": "^2.7.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "^0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.1",

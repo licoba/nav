@@ -17,6 +17,7 @@ const packagePath = path.join('.', 'package.json')
 const packageJson = JSON.parse(fs.readFileSync(packagePath).toString())
 const configJson = {
   gitRepoUrl: packageJson.gitRepoUrl,
+  gitBackupRepoName: packageJson.gitBackupRepoName,
   provider: packageJson.provider,
   branch: packageJson.branch,
   hashMode: packageJson.hashMode,
