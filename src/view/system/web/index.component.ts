@@ -28,6 +28,7 @@ import { saveAs } from 'file-saver'
 import event from 'src/utils/mitt'
 import config from '../../../../nav.config.json'
 import { createFile, createBackFile, getCDN } from 'src/api'
+import dayjs from 'dayjs'
 
 @Component({
   selector: 'app-admin',
@@ -249,11 +250,12 @@ export default class WebpComponent {
     const value = JSON.stringify(params)
     const blob = new Blob([value], { type: 'text/plain;charset=utf-8' })
     saveAs(blob, 'backups_nav.json')
-
+    const createTime = Date.now()
+    const timeString = dayjs(createTime).format('YYYY-MM-DD HH:mm')
     const fileParams = {
-      message: `添加nav备份文件${Date.now()}`,
+      message: `添加备份文件${timeString}`,
       content: value,
-      path: `nav/Nav备份_${Date.now()}.json`,
+      path: `nav/Nav备份_${timeString}.json`,
     }
 
     createBackFile(fileParams)
